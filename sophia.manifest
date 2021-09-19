@@ -1,0 +1,15 @@
+{
+  "background_color": "white",
+  "description": "File naming generator, with basics checks",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "./Assets/Icons/ms-icon-150x150.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    }
+  ],
+  "name": "SophI.A v2",
+  "short_name": "SophI.A",
+  "start_url": "./index.html"
+}

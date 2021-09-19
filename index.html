@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>SophI.A v2 frameworks free </title>
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="CE file name generator">
+    <meta name="keywords" content="generator, SophI.A">
+    <meta name="author" content="{GreenDev}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- <link rel = " sophia " href = "./sophia.manifest"> -->
+
+    <link rel="icon" type="image/png" sizes="96x96" href="./Assets/Icons/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="./CSS/main.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./CSS/main.css"/> -->
+    <!-- <link rel="stylesheet" type="text/css" href="./modal.css"> -->
+</head>
+
+<body onbeforeunload="forgetMe()"><!-- Détecte si la page est rechargéé, dans ce cas on vide le webstorage -->
+    <div class="container">
+
+        <div class="header">
+            
+            <div>
+                <ul>
+                    <li>
+                        <a class="links" href="#">Aide</a>
+                        
+                    </li>
+                    <li>
+                        <a class="links" href="#">A propos</a>
+                    </li>
+                    <li>
+                        <a class="links" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+                
+            <div>
+                <h1>SophI.A</h1>
+            </div>
+            
+        </div>
+
+        <div class="inputs">
+            <form>
+
+                <div class="person">
+                    <h2>Etat civil</h2>
+                    <div class="tooltip">
+                    <div class="firstname ">
+                        <span class="tooltiptext">Noms composés à séparer par tiret</span>
+                        <label for="firstnameInput">Nom</label>
+                        <input type="text" id="firstnameInput" name="firstnameInput" pattern="[A-Za-z-]{2,}" title="2 caractères minimum" required autofocus>
+                    </div>
+                    </div>
+                    <div class="lastname tooltip">
+                        <span class="tooltiptext">Premier prénom seulement. Si prénom composé, séparer par tiret</span>
+                        <label for="lastnameInput">Prénom</label>
+                        <input type="text" id="lastnameInput" name="lastnameInput" pattern="[A-Za-z-]{2,}" required>
+                    </div>
+                    <div class="birthdate">
+                        <label for="birthdateInput">Date de naissance</label>
+                        <input type="date" id="birthdateInput" min="1950-01-01" max="2010-01-01" required>
+                    </div>
+                </div>
+
+                <div class="identity">
+                    <h2>Justificatif identité</h2>
+                    <div class="originPi">
+                        <label for="piOriginInput">Choix pièce identité</label>
+                        <select id="piOriginInput">
+                            <option value="noSelection">Sélectionner un justificatif d'identité </option>
+                            <option value="cni" id="cIF">Carte identité française</option>
+                            <option value="passeport" id="passPrtF">Passeport français</option>
+                            <option value="CIEu" id="cIEu" disabled>Carte identité Européenne</option>
+                            <option value="titrSej" id="titrSej" disabled>Titre de séjour</option>
+                            
+                        </select>
+                    </div>
+
+                    <!-- Par défaut la sélection étant sur la carte d'identité française on affiche un champ de type number -->
+                    <div id="cniArea">
+                        <label for="piNumberInput">Numéro à 12 chiffres</label>
+                        <input type="number" id="ciNumberInput" placeholder="Entrez les 12 chiffres de la CNI" required>
+                    </div>
+                    <!-- L'autre champ de saisie de type texte est caché, il sera appelé si l'utilsateur choisis le passport -->
+                    <div id="passportArea">
+                        <label for="piNumberInput">Numéro</label>
+                        <input type="text" id="passNumberInput" placeholder="exemple 12AB34567" required>
+                    </div>
+
+                    <div id="piCreationDate">
+                        <label for="piEditionDateInput">Date de délivrance</label>
+                        <input type="date" id="piEditionDateInput" required>
+                    
+                    </div>
+                </div>
+
+                <div class="buttonGenericArea">
+                    <button type="button" id="addCompanyInfoButton">Ajouter informations entreprise</button>
+                </div>
+                
+
+                <div class="compagny" style="display: none;" >
+                    <h2>Information entreprise</h2>
+                    <div class="compagnyName">
+                        <label for="piNumberInput">Dénomination commerciale</label>
+                        <input type="number" id="piNumberInput">
+                    </div>
+
+                    <div class="idNumber">
+                        <div>
+                            <input type="radio">N1
+                            <input type="radio">N2
+                        </div>
+                        
+                        <label for="piNumberInput">Numéro RCS</label>
+                        
+                        <input type="number" id="piNumberInput">
+                    </div>
+
+                    <div class="kbisCreationDate">
+                        <label for="piEditionDateInput">Date d'édition</label>
+                        <input type="date" id="piEditionDateInput">
+                    </div>
+
+                </div>
+            
+            </form>
+
+            <div class="buttonGenericArea" style="display: none;">
+                <button type="button" id="forgetMeButton" onclick="forgetMe()">Effacer les données saisies</button>
+            </div>
+
+        </div>
+
+        <div class="buttonActionArea buttonGenericArea">
+            <div class="buttonArea">
+                <button type="button" id="helpButton">Afficher l'aide</button>
+                <button type="button" id="generateOutputsButton" aria-labelledby="bouton pour générer"  onclick="generateOutputs()">Générer</button>
+            </div>
+        </div>
+        <div class="helpArea">
+            <h1>Aide</h1>
+            <p>Coucou</p>
+            <button type="button" id="closeModalButton">cacher l'aide</button>
+        </div>
+
+        <div class="outputs">
+            <form>
+
+            <h2>Noms de fichiers générés</h2>
+
+            <div class="caz">
+
+                <label for="outCaz">Nom de fichier DCP</label>
+
+                <div class="outs">
+                
+                    <input type="text" class="out" id="outCaz" name="outCaz" value="En attente de données" disabled >
+                    <button type="button">Copie</button>
+                    
+                </div>
+            </div>
+
+            <div class="cazO">
+
+                <label for="outCazO">Nom de fichier DCP-O</label>
+
+                <div class="outs">
+
+                    <input type="text" class="out" id="outCazO" name="outCazO" value="En attente de données" disabled>
+                    <button type="button">Copie</button>
+                    
+                </div>
+            </div>
+
+            <div class="pi">
+
+                <label for="outCaz">Nom de fichier PI</label>
+
+                <div class="outs">
+
+                    <input type="text" class="out" id="outPi" name="outPi" value="En attente de données" disabled>
+                    <button type="button">Copie</button>
+
+                </div>
+                
+            </div>
+
+            <div class="due">
+
+                <label for="outDue">Nom de fichier DUE</label>
+
+                <div class="outs">
+
+                    <input type="text" class="out" id="outDue" name="outDue" value="En attente de données" disabled>
+                    <button type="button">Copie</button>
+
+                </div>
+                
+            </div>
+
+            <div class="kbis outs" style="display: none;">
+                <label for="outKbis">Nom de fichier KBIS</label>
+                <p class="out" id="outKbis"></p>
+            </div>
+
+        </form>
+
+        </div>
+
+        <div class="footer">
+            <p>&copy;{GreenDev2021}</p>
+        </div>
+    </div>
+
+    <!-- <script src="./JS/main.js"></script> -->
+    <script src="./JS/forgetMe.js"></script>
+    <script src="./JS/storeInputData.js"></script>
+    <script src="./JS/firstnameCheck.js"></script>
+    <script src="./JS/lastnameCheck.js"></script>
+    <script src="./JS/birthdateCheck.js"></script>
+    <script src="./JS/generateOutputs.js"></script>
+    <script src="./JS/hideAndShow.js"></script>
+    <script src="JS/helpModal.js"></script>
+
+</body>
+
+</html>
