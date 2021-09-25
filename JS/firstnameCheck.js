@@ -7,19 +7,19 @@ function firstnameCheck(value)
 {
     value = firstName.value.toUpperCase();
 
-    if(value)
+    if(!value)
     {
-        document.querySelector("#firstnameInput").classList.add("green");
-        localStorage.setItem('firstname', value);
-        localStorage.setItem('firstnameValueCheckStatus', true);
+        document.querySelector("#firstnameInput").classList.add("clr__red");
+        localStorage.removeItem('firstname');
+        localStorage.setItem('firstnameValueCheckStatus', false);
     }
     else // comportement par défaut
     {
-        document.querySelector("#firstnameInput").classList.remove("green");
-        //document.querySelector("#firstnameInput").classList.add("red");
-        localStorage.removeItem('firstname');
-        localStorage.setItem('firstnameValueCheckStatus', false)
+        document.querySelector("#firstnameInput").classList.remove("clr__red");
+        document.querySelector("#firstnameInput").classList.add("clr__green");
+        localStorage.setItem('firstname', value);
+        localStorage.setItem('firstnameValueCheckStatus', true);
     }
     
-    console.log("firstname is:" + " " + value)
+    //console.log("firstname is:" + " " + value)
 }

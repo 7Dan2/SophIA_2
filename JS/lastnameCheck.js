@@ -9,52 +9,51 @@ function lastnameCheck(value)
     value = lastnameInput.value.toUpperCase();
 
     //On génére un tableau des lettres du nom
-    let surnameValueArray = value.split("");
+    let lastnameValueArray = value.split("");
 
     //On cherche la présence du tiret dans ce tableau
-    let isDashInSurname = surnameValueArray.includes("-"); //renvoie true ou false
+    let isDashInLastname = lastnameValueArray.includes("-"); //renvoie true ou false
     
-    let dashInSurnamePosition, surnameFirstLetter, surnameSecondLetter;
+    let dashInLastnamePosition, lastnameFirstLetter, lastnameSecondLetter;
 
     //Si true, on renvoie la position du tiret dans le tableau
-    if (isDashInSurname == true)
+    if (isDashInLastname == true)
     {
-        dashInSurnamePosition = surnameValueArray.indexOf("-") ;
+        dashInLastnamePosition = lastnameValueArray.indexOf("-") ;
     
     //On recupère la première lettre du premier prenom
-        surnameFirstLetter = value.charAt();
+        lastnameFirstLetter = value.charAt();
     
     //On récupère la première lettre du deuxième prenom en prenant comme index renvoyé par indexOf() 
-        surnameSecondLetter = value.charAt(dashInSurnamePosition + 1);
+        lastnameSecondLetter = value.charAt(dashInLastnamePosition + 1);
 
-        console.log(surnameFirstLetter + " " + surnameSecondLetter);
-    }
-    // else
-    // {
-    //     nameFirstLetter = value.charAt();
-    //     nameSecondLetter = "";
-    // }
-    //Vérification de la mécanique dans la console
-    // console.log(namesValueArray, isDashInName, dashInNamePosition , nameFirstLetter, nameSecondLetter);
-
-    if (value)
-    {
-        document.querySelector("#lastnameInput").classList.add("green");
-        localStorage.setItem('lastname', surnameFirstLetter + "-" + surnameSecondLetter);
-        localStorage.setItem('lastnameValueCheckStatus', true)
+        // console.log(lastnameFirstLetter + " " + lastnameSecondLetter);
     }
     else
     {
-        document.querySelector("#lastnameInput").classList.remove("green");
+        lastnameFirstLetter = value.charAt();
+        lastnameSecondLetter = "";
+    }
+    //Vérification de la mécanique dans la console
+        // console.log(lastnameValueArray, isDashInLastname, dashInLastnamePosition);
+
+    if (!value)
+    {
+        document.querySelector("#lastnameInput").classList.add("clr__red");
+        localStorage.removeItem('lastnameFirstLetter');
+        localStorage.removeItem('lastnameSecondLetter');
         localStorage.setItem('lastnameValueCheckStatus', false);
-        localStorage.removeItem('lastname');
+    }
+    else
+    {
+        document.querySelector("#lastnameInput").classList.remove("clr__red");
+        document.querySelector("#lastnameInput").classList.add("clr__green");
+        localStorage.setItem('lastnameFirstLetter', lastnameFirstLetter);
+        localStorage.setItem('lastnameSecondLetter', lastnameSecondLetter);
+        localStorage.setItem('lastnameValueCheckStatus', true);
     }
     
-    console.log("lastname is:" + " " + surnameFirstLetter + "-" + surnameSecondLetter)
+    //console.log("lastname is:" + " " + lastnameFirstLetter + "-" + lastnameSecondLetter);
 
-    // // Stockge de (ou des) lettres
-    // localStorage.setItem('surname', surnameFirstLetter + "-" + surnameSecondLetter);
-
+//Fin de la fonction
 }
-
-    

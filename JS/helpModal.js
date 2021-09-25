@@ -1,4 +1,4 @@
-const getTheHelpButton = document.querySelector("#helpButton");
+const getTheHelpButton = document.querySelector("#btn__help");
 
 getTheHelpButton.addEventListener('click', e =>
 {

@@ -1,15 +1,11 @@
-const birtdateInput = document.querySelector("#birthdateInput");
+const birthdateInput = document.querySelector("#birthdateInput");
 birthdateInput.addEventListener("focusout", birthdateCheck);
 
-let birthdateValue = [] ;
 let birthdateValueCheckStatus = false;
 
-function birthdateCheck(value)
+function birthdateCheck(aValue)
+
 {
-
-
-
-
 // ######### Gestion des formats de date #########
 
     /*Récupération de la date saisie dans l'input (format AAAAMMJJ séparé par des tirets)
@@ -21,26 +17,26 @@ function birthdateCheck(value)
     //Date de naissance
     
    //Déclaration d'un tableau destiné à recevoir la date de naissance
-//    let dtNaissArray = [];
-
+   
    //On récupère la valeur du champ date quel que soit son formatage
-    value = birtdateInput.value;
+   aValue = birthdateInput.value;
+
+//    #### ça ça fonctionne !: ####
+// let birthdateValueArray = aValue.split('-');
+// birthdateValueArray.reverse();
+// console.log("pate:" +"" + birthdateValueArray[0] + birthdateValueArray[1] + birthdateValueArray[2]);
 
    //Si la date de naissance n'est pas renseignée, le rappeler à l'utilsateur
-   
-   
-   if (value == ""){
-    //    alert ("Vous devez renseigner votre date de naissance");
-       document.getElementById("birthdateInput").classList.add("red");
+   if(!aValue)
+   {
+    document.getElementById("birthdateInput").classList.add("clr__red");
    }
-   else if (value != ""){
-       document.getElementById("birthdateInput").classList.add("green");
-       //document.getElementById("birthdateInput").style.color="white";
+   else
+   {
+    document.getElementById("birthdateInput").classList.remove("clr__red");
+    document.getElementById("birthdateInput").classList.add("clr__green");
    }
-//    else {
-//        document.getElementById("dtNaiss").style.background="white";
-//    }
-   
+
    /*
    remplissage du tableau en séparant les éléments de la date en prenant comme parametre le tiret qui est par 
    présent par défaut dans les champs de type 'date'
@@ -48,46 +44,51 @@ function birthdateCheck(value)
    */
 
    /* 
-   Quelquefois, le champ de type 'date' ne fonctionne pas sous certains navigateur,
+   Quelquefois, le champ de type 'date' ne fonctionne pas sous certains navigateur (SAFARI),
    il faut alors filtrer ce qui est entré par l'utilisateur et voir comment le champ se comporte.
    */
    //Si l'utilisateur entre la date en séparant les élément par " - " :
-   if (value.includes("-"))
+   if (aValue.includes("-"))
    {
+
    /*
    On va quand même vérifier qu'il a bien commencé par le jour, si c'est un petit malin qui a mis
    l'année en premier on inverse les éléments AAAA et JJ
    */
-        birthdateValue = value.split("-");
-        if (birthdateValue[0] > 31)
+        let birthdateValueArray = aValue.split("-");
+        //console.log(birthdateValueArray2[0])
+        if (birthdateValueArray[0] > 31)
         {
-            birthdateValue.reverse();
+            birthdateValueArray.reverse();
         }
-        localStorage.setItem('birthdateForOut', birthdateValue);
+        localStorage.setItem('birthdate', birthdateValueArray[0] + birthdateValueArray[1]+ birthdateValueArray[2]);
+        //console.log("valeur recueillie: " + "" + aValue + "/" + "valeur traitée :" + "" + birthdateValueArray[0] + birthdateValueArray[1]+ birthdateValueArray[2]);
    }
    /*
    //Si l'utilisateur entre la date en séparant les élément par " / " , il faut les remplacer par des " - " 
    */
-   if (value.includes("/"))
+   if (aValue.includes("/"))
+   
    {
    //On entre les valeurs dans le tableau en gardant les " / "
    //On vérifie aussi que ce n'est pas le même petit malin qui essaie de mettre l'année en premier
-        birthdateValue = value.split("/");
-        if (birthdateValue[0] > 31)
+        birthdateValueArray = birthdateInput.split("/");
+        if (birthdateValueArray[0] > 31)
         {
-            birthdateValue.reverse();
+            birthdateValueArray.reverse();
         }
    //On créé une boucle qui va permettre de parcourir le tableau
-       for (let i = 0 ; i < birthdateValue.length ; i++)
+       for (let i = 0 ; i < birthdateValueArray.length ; i++)
        {
        var dtnaissOut = [];
-       dtnaissOut = birthdateValue[i].replace("/", "-");
-       //var pos = value.indexOf('/');
-      //var dtnaiss1 = dtnaiss.splice(pos, 2);
-       //var dtnaiss2 = dtnaiss.splice(pos, 5);
+       dtnaissOut = birthdateValueArray[i].replace("/", "-");
+       birthdateValueArray = dtnaissOut;
+
+       localStorage.setItem('birthdate', birthdateValueArray[0] + birthdateValueArray[1]+ birthdateValueArray[2]);
        }
    }
    
+//    localStorage.setItem('birthdate', birhtdateInput);
    //Vérification de la mécanique dans la console
-   console.log(value + "tableau dtnaiss: " + birthdateValue + " " + dtnaissOut);
+//    console.log(value + " " + "tableau dtnaiss: " + birthdateValueArray + " " + dtnaissOut);
 }

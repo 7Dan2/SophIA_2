@@ -17,6 +17,12 @@
     <link rel="stylesheet" type="text/css" href="./CSS/main.css">
     <!-- <link rel="stylesheet" type="text/css" href="./CSS/main.css"/> -->
     <!-- <link rel="stylesheet" type="text/css" href="./modal.css"> -->
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Charmonman&display=swap" rel="stylesheet">
+
 </head>
 
 <body onbeforeunload="forgetMe()"><!-- Détecte si la page est rechargéé, dans ce cas on vide le webstorage -->
@@ -52,13 +58,13 @@
                     <h2>Etat civil</h2>
                     <div class="tooltip">
                     <div class="firstname ">
-                        <span class="tooltiptext">Noms composés à séparer par tiret</span>
+                        <span class="tooltiptext">Noms composés à séparer par tiret, 2 caractères mini</span>
                         <label for="firstnameInput">Nom</label>
                         <input type="text" id="firstnameInput" name="firstnameInput" pattern="[A-Za-z-]{2,}" title="2 caractères minimum" required autofocus>
                     </div>
                     </div>
                     <div class="lastname tooltip">
-                        <span class="tooltiptext">Premier prénom seulement. Si prénom composé, séparer par tiret</span>
+                        <span class="tooltiptext">Premier prénom seulement. Si prénom composé, séparer par tiret, 2 caractères mini</span>
                         <label for="lastnameInput">Prénom</label>
                         <input type="text" id="lastnameInput" name="lastnameInput" pattern="[A-Za-z-]{2,}" required>
                     </div>
@@ -72,7 +78,7 @@
                     <h2>Justificatif identité</h2>
                     <div class="originPi">
                         <label for="piOriginInput">Choix pièce identité</label>
-                        <select id="piOriginInput">
+                        <select id="input__piSelection">
                             <option value="noSelection">Sélectionner un justificatif d'identité </option>
                             <option value="cni" id="cIF">Carte identité française</option>
                             <option value="passeport" id="passPrtF">Passeport français</option>
@@ -84,64 +90,68 @@
 
                     <!-- Par défaut la sélection étant sur la carte d'identité française on affiche un champ de type number -->
                     <div id="cniArea">
-                        <label for="piNumberInput">Numéro à 12 chiffres</label>
-                        <input type="number" id="ciNumberInput" placeholder="Entrez les 12 chiffres de la CNI" required>
+                        <label for="input__cniNumber">Numéro à 12 chiffres</label>
+                        <input type="number" id="input__cniNumber" placeholder="Entrez les 12 chiffres de la CNI" required>
                     </div>
                     <!-- L'autre champ de saisie de type texte est caché, il sera appelé si l'utilsateur choisis le passport -->
                     <div id="passportArea">
-                        <label for="piNumberInput">Numéro</label>
-                        <input type="text" id="passNumberInput" placeholder="exemple 12AB34567" required>
+                        <label for="input__passeportNumber">Numéro</label>
+                        <input type="text" id="input__passeportNumber" placeholder="exemple 12AB34567" required>
                     </div>
 
                     <div id="piCreationDate">
-                        <label for="piEditionDateInput">Date de délivrance</label>
-                        <input type="date" id="piEditionDateInput" required>
+                        <label for="input__deliveryDate">Date de délivrance</label>
+                        <input type="date" id="input__piDeliveryDate" required>
                     
                     </div>
                 </div>
 
                 <div class="buttonGenericArea">
-                    <button type="button" id="addCompanyInfoButton">Ajouter informations entreprise</button>
+                    <button type="button" id="btn__addCompanyInfo">Ajouter informations entreprise</button>
                 </div>
                 
 
-                <div class="compagny" style="display: none;" >
+                <div class="compagny">
                     <h2>Information entreprise</h2>
                     <div class="compagnyName">
-                        <label for="piNumberInput">Dénomination commerciale</label>
-                        <input type="number" id="piNumberInput">
+                        <label for="input__companyName">Dénomination commerciale</label>
+                        <input type="text" id="input__companyName">
                     </div>
 
                     <div class="idNumber">
                         <div>
-                            <input type="radio">N1
-                            <input type="radio">N2
+                            <label for="input__siret">SIRET</label>
+                            <input type="radio" id="input__siren" value="SIRET"/>
+                            <label for="input__siren">SIREN</label>
+                            <input type="radio" id="input__siret" value="SIREN"/>
+
+                            <label for="input__rcsNumber" placeholder="Numéro RCS"></label>
+                            <input type="number" id="input__rcsNumber">
+
                         </div>
                         
-                        <label for="piNumberInput">Numéro RCS</label>
                         
-                        <input type="number" id="piNumberInput">
                     </div>
 
                     <div class="kbisCreationDate">
-                        <label for="piEditionDateInput">Date d'édition</label>
-                        <input type="date" id="piEditionDateInput">
+                        <label for="input__kbisDate">Date d'édition</label>
+                        <input type="date" id="input__kbisDate">
                     </div>
 
                 </div>
             
             </form>
 
-            <div class="buttonGenericArea" style="display: none;">
-                <button type="button" id="forgetMeButton" onclick="forgetMe()">Effacer les données saisies</button>
+            <div class="buttonGenericArea">
+                <button type="button" id="#btn__forgetMe">Effacer les données saisies</button>
             </div>
 
         </div>
 
         <div class="buttonActionArea buttonGenericArea">
-            <div class="buttonArea">
-                <button type="button" id="helpButton">Afficher l'aide</button>
-                <button type="button" id="generateOutputsButton" aria-labelledby="bouton pour générer"  onclick="generateOutputs()">Générer</button>
+            <div class="btn__area">
+                <button type="button" id="btn__help">Afficher l'aide</button>
+                <button type="button" id="btn__generate">Générer</button>
             </div>
         </div>
         <div class="helpArea">
@@ -161,8 +171,8 @@
 
                 <div class="outs">
                 
-                    <input type="text" class="out" id="outCaz" name="outCaz" value="En attente de données" disabled >
-                    <button type="button">Copie</button>
+                    <input type="text" class="out" id="outCaz" name="outCaz" value="En attente de données" disabled>
+                    <button type="button" id="btn__cpyCpr" class="btn__cpy">Copie</button>
                     
                 </div>
             </div>
@@ -174,7 +184,7 @@
                 <div class="outs">
 
                     <input type="text" class="out" id="outCazO" name="outCazO" value="En attente de données" disabled>
-                    <button type="button">Copie</button>
+                    <button type="button" id="btn__cpyCprO" class="btn__cpy">Copie</button>
                     
                 </div>
             </div>
@@ -186,7 +196,7 @@
                 <div class="outs">
 
                     <input type="text" class="out" id="outPi" name="outPi" value="En attente de données" disabled>
-                    <button type="button">Copie</button>
+                    <button type="button" id="btn__cpyPi" class="btn__cpy">Copie</button>
 
                 </div>
                 
@@ -199,15 +209,17 @@
                 <div class="outs">
 
                     <input type="text" class="out" id="outDue" name="outDue" value="En attente de données" disabled>
-                    <button type="button">Copie</button>
+                    <button type="button" id="btn__cpyDue" class="btn__cpy">Copie</button>
 
                 </div>
                 
             </div>
 
-            <div class="kbis outs" style="display: none;">
-                <label for="outKbis">Nom de fichier KBIS</label>
-                <p class="out" id="outKbis"></p>
+            <div class="kbis outs">
+
+                <input type="text" class="out" id="outKbis" name="outKbis" value="En attente de données" disabled>
+                <button type="button" id="btn__cpyKbis" class="btn__cpy">Copie</button>
+
             </div>
 
         </form>
@@ -227,7 +239,7 @@
     <script src="./JS/birthdateCheck.js"></script>
     <script src="./JS/generateOutputs.js"></script>
     <script src="./JS/hideAndShow.js"></script>
-    <script src="JS/helpModal.js"></script>
+    <script src="./JS/helpModal.js"></script>
 
 </body>
 
