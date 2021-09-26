@@ -104,6 +104,7 @@
 #btn__forgetMe:hover
 {
     opacity: 100%;
+    cursor: pointer;
 }
 
 /* -- C -- */
@@ -262,6 +263,10 @@ input:invalid
 /* -- J -- */
 
 /* -- K -- */
+.kbis
+{
+    display: none;
+}
 
 /* -- L -- */
 
@@ -347,9 +352,13 @@ li .links:hover::after
     display: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    
 }
+
 /* -- P -- */
+.pi
+{
+    display: none;
+}
 
 #passNumber
 {
@@ -359,9 +368,6 @@ li .links:hover::after
 /* -- Q -- */
 
 /* -- R -- */
-
-
-
 :root
 {
     --green-bg-success: hsl(120, 100%, 27%);
@@ -370,7 +376,6 @@ li .links:hover::after
 }
 
 /* -- S -- */
-
 select:focus
 {
     border: 2px solid #560;
@@ -407,8 +412,6 @@ select:focus
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
-
-
 
 /* -- U -- */
 
